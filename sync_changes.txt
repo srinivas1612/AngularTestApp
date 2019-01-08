@@ -10,4 +10,4 @@
    ->TrainerImages
    ->CourseImages
 
-1. Replace or change - auth.interceptor.ts file
+1. Replace or change - auth.interceptor.ts file 
