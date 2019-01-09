@@ -7,4 +7,6 @@
 3. loading
      -- Change image, keep image locally.
 
+4. Pwd encrypt and decrypt
+   https://stackoverflow.com/questions/10168240/encrypting-decrypting-a-string-in-c-sharp
 ----------------------
