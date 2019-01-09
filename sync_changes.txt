@@ -6,3 +6,5 @@
 
 3. loading
      -- Change image, keep image locally.
+
+----------------------
