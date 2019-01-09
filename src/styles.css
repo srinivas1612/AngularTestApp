@@ -138,6 +138,13 @@ footer .glyphicon {
     -webkit-animation-duration: 1s;
     visibility: visible;
 }
+.is-invalid { 
+    border: 1px solid #ff7b76;
+  }
+
+  .invalid-feedback {
+    color: #ff7b76;
+}
 @keyframes slide {
   0% {
     opacity: 0;

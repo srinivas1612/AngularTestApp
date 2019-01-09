@@ -6,6 +6,7 @@ import { HomeLayoutComponent } from './_layouts/home-layout/home-layout.componen
 import { AdminLayoutComponent } from './_layouts/admin-layout/admin-layout.component';
 import { UserLayoutComponent } from './_layouts/user-layout/user-layout.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 
@@ -47,6 +48,7 @@ const appRoutes: Routes = [
         component: UserLayoutComponent, 
         children: [
             { path: 'userdetails', component: UserdetailsComponent, canActivate:[AuthGuard]},
+            { path: 'changepassword', component: ChangePasswordComponent, canActivate:[AuthGuard]},
         ]
     },
 

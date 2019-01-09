@@ -27,6 +27,7 @@ import { UserHeaderComponent } from './_layouts/user-header/user-header.componen
 import { UserLayoutComponent } from './_layouts/user-layout/user-layout.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     UserHeaderComponent,
     UserLayoutComponent,
     UserdetailsComponent,
-    FilterPipe
+    FilterPipe,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -28,4 +28,15 @@ export class UserService {
     return this.http.post(this.baseUrl, user, options);
   }
   
+  getUserDetails(): Observable<UserDetails> {
+    return this.http.get<UserDetails>(this.baseUrl + "/getuserdetails") ;
+  }
+
+  saveUser(user: UserDetails) {
+    return this.http.post(this.baseUrl + "/saveuser", user);
+  }
+
+  changePassword(user: UserDetails) {
+    return this.http.post(this.baseUrl + "/changepassword", user);
+  }
 } 
