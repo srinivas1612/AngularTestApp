@@ -1,0 +1,207 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using CoreWebAPI.Models;
+using CoreWebAPI.Helpers;
+using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+
+namespace CoreWebAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UsersController : ControllerBase
+    {
+        private readonly UserContext _context;
+        private readonly AppSettings _appSettings;
+
+        protected int GetUserID()
+        {
+            return int.Parse(this.User.Claims.First(i => i.Type == "UserID").Value);
+        }
+
+        public UsersController(UserContext context, IOptions<AppSettings> appSettings)
+        {
+            _context = context;
+            _appSettings = appSettings.Value;
+        }
+
+        // GET: api/Users
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IEnumerable<User> GetUser()
+        {
+
+            return _context.User;
+        }
+
+        // GET: api/Users/GetUserDetails
+        [Route("GetUserDetails")]
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetUserDetails()
+        {
+            int userID = GetUserID();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _context.User.FindAsync(userID);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
+
+        //api/users/login
+        [Route("login")]
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] User input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _context.User.Where(x => x.EmailID == input.EmailID && x.Password == input.Password).FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Role, user.UserType),
+                    new Claim("UserID", user.UserID.ToString()),
+                }),
+
+                Expires = DateTime.UtcNow.AddMinutes(60),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            // return basic user info and token to store client side
+            return Ok(new
+            {
+                user = user,
+                Token = tokenString
+            });
+        }
+
+        // POST: api/Users/SaveUser
+        [Authorize]
+        [Route("SaveUser")]
+        public async Task<IActionResult> SaveUser([FromBody] User input)
+        {
+            int id = GetUserID();
+            try
+            {
+                var user = _context.User.Where(e => e.UserID == id).FirstOrDefault();
+                if(user.EmailID != input.EmailID)
+                {
+                    if (_context.User.Any(e => e.EmailID == input.EmailID))
+                        return BadRequest();
+                }
+                if (user != null)
+                {
+                    user.Name = input.Name;
+                    user.EmailID = input.EmailID;
+                    user.PhoneNumber = input.PhoneNumber;
+                    _context.Entry(user).State = EntityState.Modified;
+                }
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+            }
+
+            return Ok();
+        }
+
+        // POST: api/Users/ChangePassword
+        [Authorize]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] User input)
+        {
+            int id = GetUserID();
+            try
+            {
+                var user = _context.User.Where(e => e.UserID == id).FirstOrDefault();
+                if (user != null)
+                {
+                    user.Password = input.Password;
+                    _context.Entry(user).State = EntityState.Modified;
+                }
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+            }
+            return Ok();
+        }
+
+        // POST: api/Users
+        [HttpPost]
+        public async Task<IActionResult> PostUser([FromBody] User user)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                user.UserType = "User";
+                _context.User.Add(user);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetUser", new { id = user.UserID }, user);
+            }
+            catch (Exception ex) { string msg = ex.Message; }
+            return CreatedAtAction("GetUser", new { id = 0 }, user);
+        }
+
+        // DELETE: api/Users/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _context.User.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _context.User.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(user);
+        }
+
+        private bool UserExists(int id)
+        {
+            return _context.User.Any(e => e.UserID == id);
+        }
+    }
+}
