@@ -1,0 +1,8 @@
+1. get user details and save
+   -- change response handling in API and .ts file
+
+2. Change pwd
+     -- change response handling in API and .ts file
+
+3. loading
+     -- Change image, keep image locally.
