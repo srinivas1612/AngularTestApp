@@ -9,4 +9,17 @@
 
 4. Pwd encrypt and decrypt
    https://stackoverflow.com/questions/10168240/encrypting-decrypting-a-string-in-c-sharp
+
+5. Take comments and rating and store in one table.
+   after inserting calculate rating and store in main table
+
+    decimal ratingSum = sum of rating;
+    decimal ratingCount = count of ratings;
+
+    decimal rating = 0;
+    if (ratingCount > 0)
+    {
+        rating = (ratingSum / ratingCount);
+    }
+    
 ----------------------
