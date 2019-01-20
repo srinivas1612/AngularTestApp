@@ -1,3 +1,1 @@
-1. To avoid validation issue, navigate user to login after register, institute register
-2. Validations - Phone Number, Site URL -> Reg, Institute Reg, User Profile Update, Institute Update, check where ever 
-----------------------
+
