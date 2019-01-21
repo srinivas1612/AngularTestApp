@@ -31,11 +31,24 @@
                         <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
                     </div>
                 </div>
+              
                 <div class="form-group">
                     <label>Phone Number</label>
                     <input type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
                     <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
                         <div *ngIf="f.phoneNumber.errors.required">Phone Number is required</div>
+                        <div *ngIf="f.phoneNumber.errors.minlength">Please enter valid number</div>
+                        <div *ngIf="f.phoneNumber.errors.invalidNumber">Please enter valid number</div>
+                    </div>
+                    <small class="invalid-feedback" *ngIf="registerForm.get('phoneNumber').touched && registerForm.get('phoneNumber').hasError('invalidNumber')">Numbers accepted only!</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Site URL</label>
+                    <input type="url" formControlName="site" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.site.errors }" />
+                    <div *ngIf="submitted && f.site.errors" class="invalid-feedback">
+                        <div *ngIf="f.site.errors.required">Site is required</div>
+                        <div *ngIf="f.site.errors.invalidUrl">Enter valid site Url</div>
                     </div>
                 </div>
                 <div class="form-group">
