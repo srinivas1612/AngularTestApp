@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { UserService } from '../services/user.service';
+import { CustomValidator } from '../others/customvalidation';
 @Component({
     selector: 'app-reactive',
     templateUrl: './reactive.component.html',
@@ -19,7 +20,8 @@ export class ReactiveComponent implements OnInit {
             name: ['', Validators.required],
             emailID: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]],
-            phoneNumber: ['', Validators.required],
+            phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+            site: ['', [Validators.required, CustomValidator.urlValidator]],
         });
     }
 
@@ -34,9 +36,11 @@ export class ReactiveComponent implements OnInit {
             return;
         }
 
+       //this.message = "Success.";
+
         this.userService.createUser(this.registerForm.value)
             .subscribe((data: any) => {
-                this.router.navigate(['users']);
+               this.router.navigate(['users']);
             }, error => {
                 console.log(error);
                 if (error.status == 404) {
