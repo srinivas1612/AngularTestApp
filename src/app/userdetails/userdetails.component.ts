@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { UserService } from '../services/user.service';
@@ -10,13 +10,17 @@ import { UserDetails } from '../models';
   styleUrls: ['./userdetails.component.css']
 })
 export class UserdetailsComponent implements OnInit {
+   
     loading = false;
     message = "";
     userForm: FormGroup;
     submitted = false;
+    url: string;
     user: UserDetails;  
+    imgBase64String = "";
 
-    constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router) { }
+    constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router,
+     private cd: ChangeDetectorRef) { }
 
     ngOnInit() {
       this.userForm = this.formBuilder.group({
@@ -24,6 +28,7 @@ export class UserdetailsComponent implements OnInit {
         name: ['', Validators.required],
         emailID: ['', [Validators.required, Validators.email]],
         phoneNumber: ['', Validators.required],
+        userImageUpload: [''],
        });
         this.getUserDetails();
     }
@@ -44,14 +49,33 @@ export class UserdetailsComponent implements OnInit {
       });
     }
 
+      onUploadChange(evt: any) {
+        const file = evt.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = this.handleReaderLoaded.bind(this);
+          reader.readAsBinaryString(file);
+        }
+      }
+
+      handleReaderLoaded(e) {
+        this.imgBase64String = 'data:image/png;base64,' + btoa(e.target.result);
+        this.userForm.patchValue({
+          userImageUpload: btoa(e.target.result),
+      });
+      }
+
     onSubmit() {
         this.submitted = true;
-
         // stop here if form is invalid
         if (this.userForm.invalid) {
             return;
         }
+
         this.loading = true;
+        
+        
+        
         this.userService.saveUser(this.userForm.value)
             .subscribe((data: any) => {
               this.message = "Success.";
@@ -61,5 +85,4 @@ export class UserdetailsComponent implements OnInit {
                 this.loading = false;
             });
     }
-
 }
