@@ -38,3 +38,25 @@ create manully production appsettings file and add configuration settings in dev
 for more info:
 
 https://blog.elmah.io/config-transformations-in-aspnetcore/
+
+
+send mail template:
+https://www.tonyranieri.com/blog/2018/01/31/Sending-HTML-Templated-Emails-From-.NET-Core-2.0/
+
+create folder like MailTemplates and add files
+
+AccountActivationTemplate:
+---------------------------
+Hello {username},
+<br/><br/>
+You have been registered successfully on Courseazy.com!!
+
+<br/><br/>
+<b>Please click the link below to activate your account:</b>
+<br/><br/>
+{linkhere}
+</br/><br/><br/>
+<b>Best regards,</b><br/>
+Team Courseazy
+
+
