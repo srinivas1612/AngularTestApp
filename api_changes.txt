@@ -16,3 +16,25 @@ public Startup(IConfiguration configuration, IHostingEnvironment env)
         in ConfigureServices method:
         
            services.Configure<Configurations>(Configuration.GetSection("Configurations"));
+
+create manully production appsettings file and add configuration settings in dev and prod files
+
+"Configurations": {
+    "WebsiteURL": "production url"
+  }
+  
+   public class Configurations
+    {
+        public string WebsiteURL { get; set; }
+    }
+    
+     private readonly Configurations _configurationSettings;
+
+        public ValuesController(IOptions<Configurations> configurationSettings)
+        {
+            _configurationSettings = configurationSettings.Value;
+        }
+        
+for more info:
+
+https://blog.elmah.io/config-transformations-in-aspnetcore/
