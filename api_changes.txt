@@ -60,8 +60,10 @@ You have been registered successfully on Courseazy.com!!
 Team Courseazy
 
 
-link
+link:
 websiteurl/accountactivation/{encryptedid}
+
+websiteur -- get from configurations dynamically based on environment
 
 on page load send request with {encryptedid}
 if validated and the redirect to login page
