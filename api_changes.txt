@@ -54,9 +54,16 @@ You have been registered successfully on Courseazy.com!!
 <br/><br/>
 <b>Please click the link below to activate your account:</b>
 <br/><br/>
-{linkhere}
+{linkhere} 
 </br/><br/><br/>
 <b>Best regards,</b><br/>
 Team Courseazy
 
+
+link
+websiteurl/accountactivation/{encryptedid}
+
+on page load send request with {encryptedid}
+if validated and the redirect to login page
+if already validated then dispaly error message and navigate to login page 
 
