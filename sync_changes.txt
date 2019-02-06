@@ -1,4 +1,1 @@
 
-1. Upload image
-2. Send appsettings objetct and use
-3. Comments rating --> check duplicate, same user can't give extra rating but can edit
