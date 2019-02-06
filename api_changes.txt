@@ -1,4 +1,1 @@
-   var base64string = input.userImageUpload;
-                var base64array = Convert.FromBase64String(base64string);
-                var filePath = Path.Combine($"{_hostingEnvironment.ContentRootPath}/Uploads/{DateTime.Now.Ticks}.png");
-                System.IO.File.WriteAllBytes(filePath, base64array);
+
