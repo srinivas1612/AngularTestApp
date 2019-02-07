@@ -24,3 +24,10 @@
 ------------------------------------------
 1. Change theme color to website theme
 2. replace variables
+
+------------------------------
+
+To fetch images:
+
+1. app.UseStaticFiles();    -- add in startup.cs file at Configure method
+2. store images in wwwroot folder
