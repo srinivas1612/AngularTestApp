@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-<header style="background-color: #666; padding: 1px; text-align: center; font-size: 18px; color: white;">
+<header style="background-color: #71B52D; padding: 1px; text-align: center; font-size: 18px; color: white;">
   <h2 style="margin: 15px;">Courseazy</h2>
 </header>
 <section style="display: -webkit-flex;display: flex;">
@@ -15,15 +15,14 @@
 	
   </article>
 </section>
-<footer style="background-color: #777; padding: 1px; text-align: center; color: white;">
+<footer style="background-color: #71B52D; padding: 1px; text-align: center; color: white;">
   <p  style="margin: 10px;"><a style="color:#FFF;text-decoration:none;" href="http://www.courseazy.com" target="_blank">www.courseazy.com</a></p>
 </footer>
 </body>
 </html>
 
 ------------------------------------------
-1. Change theme color to website theme
-2. replace variables
+1. replace variables from old template
 
 ------------------------------
 
