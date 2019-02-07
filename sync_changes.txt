@@ -1,1 +1,26 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<header style="background-color: #666; padding: 1px; text-align: center; font-size: 18px; color: white;">
+  <h2 style="margin: 15px;">Courseazy</h2>
+</header>
+<section style="display: -webkit-flex;display: flex;">
+  <article style="-webkit-flex: 3; -ms-flex: 3; flex: 3;  background-color: #f1f1f1; padding: 10px;">
+    <p>Hello {username},<p>
+	<p>You have been registered successfully on Courseazy.com!! </p>
+    <h4>Please click the link below to activate your account: </h4>
+    <p>{copy link code here}</p>
+	<h4>Best Regards,<br/>Courseazy</h4>
+	
+  </article>
+</section>
+<footer style="background-color: #777; padding: 1px; text-align: center; color: white;">
+  <p  style="margin: 10px;"><a style="color:#FFF;text-decoration:none;" href="http://www.courseazy.com" target="_blank">www.courseazy.com</a></p>
+</footer>
+</body>
+</html>
+
+------------------------------------------
+1. Change theme color to website theme
+2. replace variables
