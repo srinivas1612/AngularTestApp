@@ -13,4 +13,4 @@
 ----------------
 1. Course Table, Course form
 2. Trainer Table, Trainer form
-2. Forgot password functionality
+
