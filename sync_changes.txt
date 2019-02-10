@@ -1,1 +1,15 @@
 
+<div class="form-group">
+                <label for="trainerName" class="col-sm-3 control-label">Trainer Name <span class="text-danger" style="font-size: 15px;">*</span></label>
+                <div class="col-sm-9">
+                  <input type="text" formControlName="trainerName" maxlength="100" class="form-control" placeholder="Enter trainer name..."
+                    [ngClass]="{ 'is-invalid': submitted && f.trainerName.errors }" />
+                  <div *ngIf="submitted && f.trainerName.errors" class="invalid-input">
+                    <div *ngIf="f.trainerName.errors.required">Name is required</div>
+                  </div>
+                </div>
+              </div>
+              
+----------------
+1. Course Table, Course form
+2. Traainer Table, Trainer form
