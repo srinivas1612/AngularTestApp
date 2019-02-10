@@ -10,6 +10,28 @@
                 </div>
               </div>
               
+              /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [CourseID]
+      ,[InstituteID]
+      ,[CourseName]
+      ,[CourseImage]
+      ,[Currency]
+      ,[OriginalFee]
+      ,[DiscountType]
+      ,[FinalFee]
+      ,[CourseDuration]
+      ,[CourseTimings]
+      ,[CourseMode]
+      ,[TrainerID]
+      ,[CourseDescription]
+      ,[Features]
+      ,[Keywords]
+      ,[Category]
+      ,[CreatedDate]
+      ,[ModifiedDate]
+      ,[Status]
+  FROM [Courseazy].[dbo].[Courses]
+              
 ----------------
 1. Course Table, Course form
 2. Trainer Table, Trainer form
