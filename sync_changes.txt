@@ -32,6 +32,13 @@ SELECT TOP 1000 [CourseID]
       ,[Status]
   FROM [Courseazy].[dbo].[Courses]
               
+              
+TrainerSkillSet 
+Experience
+AboutTrainer
+TrainerImage
+              
+              
 ----------------
 1. Course Table, Course form
 2. Trainer Table, Trainer form
