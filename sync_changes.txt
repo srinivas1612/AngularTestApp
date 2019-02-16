@@ -1,54 +1,5 @@
-Trainer Table:
-Add Extra columns: TrainerExperience, TrainerSkillSet, AboutTrainer, TrainerImage, Status
-              
-Trainer form:
-
-<div class="form-group">
-    <label for="trainerName" class="col-sm-3 control-label">Trainer Name <span class="text-danger" style="font-size: 15px;">*</span></label>
-    <div class="col-sm-9">
-      <input type="text" formControlName="trainerName" maxlength="100" class="form-control" placeholder="Enter trainer name..."
-        [ngClass]="{ 'is-invalid': submitted && f.trainerName.errors }" />
-      <div *ngIf="submitted && f.trainerName.errors" class="invalid-input">
-        <div *ngIf="f.trainerName.errors.required">Please enter trainer name</div>
-      </div>
-    </div>
-  </div>
-
-   <div class="form-group">
-    <label for="trainerExperience" class="col-sm-3 control-label">Trainer Experience <span class="text-danger" style="font-size: 15px;">*</span></label>
-    <div class="col-sm-9">
-      <input type="text" formControlName="trainerExperience" maxlength="100" class="form-control" placeholder="Enter trainer experience..."
-        [ngClass]="{ 'is-invalid': submitted && f.trainerExperience.errors }" />
-      <div *ngIf="submitted && f.trainerExperience.errors" class="invalid-input">
-        <div *ngIf="f.trainerExperience.errors.required">Please enter trainer experience</div>
-      </div>
-    </div>
-  </div> 
 
 
-  <div class="form-group">
-    <label for="trainerSkillSet" class="col-sm-3 control-label">Trainer Skill Set <span class="text-danger" style="font-size: 15px;">*</span></label>
-    <div class="col-sm-9">
-      <input type="text" formControlName="trainerSkillSet" maxlength="200" class="form-control" placeholder="Enter trainer skill set..."
-        [ngClass]="{ 'is-invalid': submitted && f.trainerSkillSet.errors }" />
-      <div *ngIf="submitted && f.trainerSkillSet.errors" class="invalid-input">
-        <div *ngIf="f.trainerSkillSet.errors.required">Please specify trainer skill set</div>
-      </div>
-    </div>
-  </div> 
-
-ngOnInit() {
-    this.trainerForm = this.formBuilder.group({
-      trainerName: ['', Validators.required],
-      trainerExperience: ['', Validators.required],
-      trainerSkillSet: ['', Validators.required],
-    });
-  }
-
-
-AboutTrainer, TrainerImage  - get from course
-
------------------------------------------------------------
 
 <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
