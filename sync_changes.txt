@@ -52,4 +52,5 @@ https://valor-software.com/ngx-bootstrap/#/documentation#getting-started
   deleteUserDecline(): void {
     this.modalRef.hide();
   }
-  
+  -----------------------------
+  courses -> Pause/Live like waterman
