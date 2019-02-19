@@ -1,4 +1,11 @@
 
+CREATE TABLE [dbo].[CourseInquiries](
+    [InquiryID] [int] IDENTITY(1,1) NOT NULL Primary Key,
+	[UserID] [int] NOT NULL,
+	[CourseName] [nvarchar](1000) NULL, -- check datatype
+	[InquiryDate] DateTime NOT NULL,
+)
+
 Delete functionality:
 --------------------
 
