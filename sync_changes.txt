@@ -1,1 +1,8 @@
-
+get top 5 records only:
+-------------------------
+getUsers()
+  {
+    this.userService.getUsers()
+    .subscribe((data) => this.users = data.slice(0, 5));
+  }
+---------------------
